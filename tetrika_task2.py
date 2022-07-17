@@ -29,8 +29,8 @@ def animal_counter():
         names = soup.find('div', class_='mw-category mw-category-columns').find_all('a')
         while True:
             if names[-1].text[0] == alphabet[letter] or f' {alphabet[letter].lower()}' in names[-1].text:
-                # Проверка если запись в википедииначинается не на животное а на прилагательное
-                # Пример японский полоз. В вики начинается на "Я", хотя животное на "П"
+                # Проверка если запись о животном в википедии начинается не на букву животного а на букву прилагательное
+                # Пример - японский полоз. В вики начинается на "Я", хотя животное на "П"
                 if not alphabet[letter] in animals.keys():
                     animals[alphabet[letter]] = 0
                 animals[alphabet[letter]] += len(names)
