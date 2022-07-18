@@ -23,7 +23,6 @@ def animal_counter():
     page = requests.get(url).text
 
     animals = {}
-    print("Смотрю букву -", alphabet[letter])
     while True:
         soup = BeautifulSoup(page, 'lxml')
         names = soup.find('div', class_='mw-category mw-category-columns').find_all('a')
@@ -41,10 +40,10 @@ def animal_counter():
                 last_word_pos = binary_search(names, alphabet[letter])
                 animals[alphabet[letter]] += last_word_pos + 1
                 names = names[last_word_pos + 1:]
+                print(f'{alphabet[letter]}:', animals[alphabet[letter]])
                 letter += 1
                 if letter >= len(alphabet):
                     return animals
-                print("Смотрю букву -", alphabet[letter])
 
         links = soup.find('div', id='mw-pages').find_all('a')
         for i in reversed(range(len(links))):
@@ -53,4 +52,4 @@ def animal_counter():
                 page = requests.get(url).text
 
 
-print(animal_counter())
+animal_counter()
